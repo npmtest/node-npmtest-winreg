@@ -1,0 +1,3205 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-winreg/node_modules/winreg/lib/registry.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-winreg">npmtest-winreg (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-winreg/node_modules/winreg/lib/registry.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">11.73% <small>(38 / 324)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 123)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 64)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">12.38% <small>(38 / 307)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-winreg/node_modules/winreg/lib/</a> » registry.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910
+911
+912
+913
+914
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960
+961
+962
+963
+964
+965
+966
+967
+968
+969
+970
+971
+972
+973
+974
+975
+976
+977
+978
+979
+980
+981
+982
+983
+984
+985
+986
+987
+988
+989
+990
+991
+992
+993
+994
+995</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/************************************************************************************************************
+ * registry.js - contains a wrapper for the REG command under Windows, which provides access to the registry
+ *
+ * @author Paul Bottin a/k/a FrEsC
+ *
+ */
+&nbsp;
+/* imports */
+var util          = require('util')
+,   path          = require('path')
+,   spawn         = require('child_process').spawn
+&nbsp;
+/* set to console.log for debugging */
+,   log           = <span class="fstat-no" title="function not covered">function () {</span>}
+&nbsp;
+/* registry hive ids */
+,   HKLM          = 'HKLM'
+,   HKCU          = 'HKCU'
+,   HKCR          = 'HKCR'
+,   HKU           = 'HKU'
+,   HKCC          = 'HKCC'
+,   HIVES         = [ HKLM, HKCU, HKCR, HKU, HKCC ]
+&nbsp;
+/* registry value type ids */
+,   REG_SZ        = 'REG_SZ'
+,   REG_MULTI_SZ  = 'REG_MULTI_SZ'
+,   REG_EXPAND_SZ = 'REG_EXPAND_SZ'
+,   REG_DWORD     = 'REG_DWORD'
+,   REG_QWORD     = 'REG_QWORD'
+,   REG_BINARY    = 'REG_BINARY'
+,   REG_NONE      = 'REG_NONE'
+,   REG_TYPES     = [ REG_SZ, REG_MULTI_SZ, REG_EXPAND_SZ, REG_DWORD, REG_QWORD, REG_BINARY, REG_NONE ]
+&nbsp;
+/* default registry value name */
+,   DEFAULT_VALUE = ''
+&nbsp;
+/* general key pattern */
+,   KEY_PATTERN   = /(\\[a-zA-Z0-9_\s]+)*/
+&nbsp;
+/* key path pattern (as returned by REG-cli) */
+,   PATH_PATTERN  = /^(HKEY_LOCAL_MACHINE|HKEY_CURRENT_USER|HKEY_CLASSES_ROOT|HKEY_USERS|HKEY_CURRENT_CONFIG)(.*)$/
+&nbsp;
+/* registry item pattern */
+,   ITEM_PATTERN  = /^(.*)\s(REG_SZ|REG_MULTI_SZ|REG_EXPAND_SZ|REG_DWORD|REG_QWORD|REG_BINARY|REG_NONE)\s+([^\s].*)$/
+&nbsp;
+/**
+ * Creates an Error object that contains the exit code of the REG.EXE process.
+ * This contructor is private. Objects of this type are created internally and returned in the &lt;code&gt;err&lt;/code&gt; parameters in case the REG.EXE process doesn't exit cleanly.
+ *
+ * @private
+ * @class
+ *
+ * @param {string} message - the error message
+ * @param {number} code - the process exit code
+ *
+ */
+<span class="fstat-no" title="function not covered">function ProcessUncleanExitError(message, code) {</span>
+<span class="cstat-no" title="statement not covered">  if (!(this instanceof ProcessUncleanExitError))</span>
+<span class="cstat-no" title="statement not covered">    return new ProcessUncleanExitError(message, code);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  Error.captureStackTrace(this, ProcessUncleanExitError);</span>
+&nbsp;
+  /**
+   * The error name.
+   * @readonly
+   * @member {string} ProcessUncleanExitError#name
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('name', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return ProcessUncleanExitError.name; </span>});</span>
+&nbsp;
+  /**
+   * The error message.
+   * @readonly
+   * @member {string} ProcessUncleanExitError#message
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('message', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return message; </span>});</span>
+&nbsp;
+  /**
+   * The process exit code.
+   * @readonly
+   * @member {number} ProcessUncleanExitError#code
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('code', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return code; </span>});</span>
+&nbsp;
+}
+&nbsp;
+util.inherits(ProcessUncleanExitError, Error);
+&nbsp;
+/*
+ * Captures stdout/stderr for a child process
+ */
+<span class="fstat-no" title="function not covered">function captureOutput(child) {</span>
+  // Use a mutable data structure so we can append as we get new data and have
+  // the calling context see the new data
+<span class="cstat-no" title="statement not covered">  var output = {'stdout': '', 'stderr': ''};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  child.stdout.on('data', <span class="fstat-no" title="function not covered">function(data) {</span> <span class="cstat-no" title="statement not covered">output["stdout"] += data.toString(); </span>});</span>
+<span class="cstat-no" title="statement not covered">  child.stderr.on('data', <span class="fstat-no" title="function not covered">function(data) {</span> <span class="cstat-no" title="statement not covered">output["stderr"] += data.toString(); </span>});</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return output;</span>
+}
+&nbsp;
+&nbsp;
+/*
+ * Returns an error message containing the stdout/stderr of the child process
+ */
+<span class="fstat-no" title="function not covered">function mkErrorMsg(registryCommand, code, output) {</span>
+<span class="cstat-no" title="statement not covered">    var stdout = output['stdout'].trim();</span>
+<span class="cstat-no" title="statement not covered">    var stderr = output['stderr'].trim();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var msg = util.format("%s command exited with code %d:\n%s\n%s", registryCommand, code, stdout, stderr);</span>
+<span class="cstat-no" title="statement not covered">    return new ProcessUncleanExitError(msg, code);</span>
+}
+&nbsp;
+&nbsp;
+/*
+ * Converts x86/x64 to 32/64
+ */
+<span class="fstat-no" title="function not covered">function convertArchString(archString) {</span>
+<span class="cstat-no" title="statement not covered">  if (archString == 'x64') {</span>
+<span class="cstat-no" title="statement not covered">    return '64';</span>
+  } else <span class="cstat-no" title="statement not covered">if (archString == 'x86') {</span>
+<span class="cstat-no" title="statement not covered">    return '32';</span>
+  } else {
+<span class="cstat-no" title="statement not covered">    throw new Error('illegal architecture: ' + archString + ' (use x86 or x64)');</span>
+  }
+}
+&nbsp;
+&nbsp;
+/*
+ * Adds correct architecture to reg args
+ */
+<span class="fstat-no" title="function not covered">function pushArch(args, arch) {</span>
+<span class="cstat-no" title="statement not covered">  if (arch) {</span>
+<span class="cstat-no" title="statement not covered">    args.push('/reg:' + convertArchString(arch));</span>
+  }
+}
+&nbsp;
+/*
+ * Get the path to system's reg.exe. Useful when another reg.exe is added to the PATH
+ * Implemented only for Windows
+ */
+<span class="fstat-no" title="function not covered">function getRegExePath() {</span>
+<span class="cstat-no" title="statement not covered">    if (process.platform === 'win32') {</span>
+<span class="cstat-no" title="statement not covered">        return path.join(process.env.windir, 'system32', 'reg.exe');</span>
+    } else {
+<span class="cstat-no" title="statement not covered">        return "REG";</span>
+    }
+}
+&nbsp;
+&nbsp;
+/**
+ * Creates a single registry value record.
+ * This contructor is private. Objects of this type are created internally and returned by methods of {@link Registry} objects.
+ *
+ * @private
+ * @class
+ *
+ * @param {string} host - the hostname
+ * @param {string} hive - the hive id
+ * @param {string} key - the registry key
+ * @param {string} name - the value name
+ * @param {string} type - the value type
+ * @param {string} value - the value
+ * @param {string} arch - the hive architecture ('x86' or 'x64')
+ *
+ */
+<span class="fstat-no" title="function not covered">function RegistryItem (host, hive, key, name, type, value, arch) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (!(this instanceof RegistryItem))</span>
+<span class="cstat-no" title="statement not covered">    return new RegistryItem(host, hive, key, name, type, value, arch);</span>
+&nbsp;
+  /* private members */
+<span class="cstat-no" title="statement not covered">  var _host = host    // hostname</span>
+  ,   _hive = hive    // registry hive
+  ,   _key = key      // registry key
+  ,   _name = name    // property name
+  ,   _type = type    // property type
+  ,   _value = value  // property value
+  ,   _arch = arch    // hive architecture
+&nbsp;
+  /* getters/setters */
+&nbsp;
+  /**
+   * The hostname.
+   * @readonly
+   * @member {string} RegistryItem#host
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('host', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return _host; </span>});</span>
+&nbsp;
+  /**
+   * The hive id.
+   * @readonly
+   * @member {string} RegistryItem#hive
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('hive', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return _hive; </span>});</span>
+&nbsp;
+  /**
+   * The registry key.
+   * @readonly
+   * @member {string} RegistryItem#key
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('key', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return _key; </span>});</span>
+&nbsp;
+  /**
+   * The value name.
+   * @readonly
+   * @member {string} RegistryItem#name
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('name', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return _name; </span>});</span>
+&nbsp;
+  /**
+   * The value type.
+   * @readonly
+   * @member {string} RegistryItem#type
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('type', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return _type; </span>});</span>
+&nbsp;
+  /**
+   * The value.
+   * @readonly
+   * @member {string} RegistryItem#value
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('value', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return _value; </span>});</span>
+&nbsp;
+  /**
+   * The hive architecture.
+   * @readonly
+   * @member {string} RegistryItem#arch
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('arch', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return _arch; </span>});</span>
+&nbsp;
+}
+&nbsp;
+util.inherits(RegistryItem, Object);
+&nbsp;
+/**
+ * Creates a registry object, which provides access to a single registry key.
+ * Note: This class is returned by a call to ```require('winreg')```.
+ *
+ * @public
+ * @class
+ *
+ * @param {object} options - the options
+ * @param {string=} options.host - the hostname
+ * @param {string=} options.hive - the hive id
+ * @param {string=} options.key - the registry key
+ * @param {string=} options.arch - the optional registry hive architecture ('x86' or 'x64'; only valid on Windows 64 Bit Operating Systems)
+ *
+ * @example
+ * var Registry = require('winreg')
+ * ,   autoStartCurrentUser = new Registry({
+ *       hive: Registry.HKCU,
+ *       key:  '\\Software\\Microsoft\\Windows\\CurrentVersion\\Run'
+ *     });
+ *
+ */
+<span class="fstat-no" title="function not covered">function Registry (options) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (!(this instanceof Registry))</span>
+<span class="cstat-no" title="statement not covered">    return new Registry(options);</span>
+&nbsp;
+  /* private members */
+<span class="cstat-no" title="statement not covered">  var _options = options || {}</span>
+  ,   _host = '' + (_options.host || '')    // hostname
+  ,   _hive = '' + (_options.hive || HKLM)  // registry hive
+  ,   _key  = '' + (_options.key  || '')    // registry key
+  ,   _arch = _options.arch || null         // hive architecture
+&nbsp;
+  /* getters/setters */
+&nbsp;
+  /**
+   * The hostname.
+   * @readonly
+   * @member {string} Registry#host
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('host', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return _host; </span>});</span>
+&nbsp;
+  /**
+   * The hive id.
+   * @readonly
+   * @member {string} Registry#hive
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('hive', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return _hive; </span>});</span>
+&nbsp;
+  /**
+   * The registry key name.
+   * @readonly
+   * @member {string} Registry#key
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('key', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return _key; </span>});</span>
+&nbsp;
+  /**
+   * The full path to the registry key.
+   * @readonly
+   * @member {string} Registry#path
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('path', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return (_host.length == 0 ? '' : '\\\\' + host + '\\') + _hive + _key; </span>});</span>
+&nbsp;
+  /**
+   * The registry hive architecture ('x86' or 'x64').
+   * @readonly
+   * @member {string} Registry#arch
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('arch', <span class="fstat-no" title="function not covered">function () {</span> <span class="cstat-no" title="statement not covered">return _arch; </span>});</span>
+&nbsp;
+  /**
+   * Creates a new {@link Registry} instance that points to the parent registry key.
+   * @readonly
+   * @member {Registry} Registry#parent
+   */
+<span class="cstat-no" title="statement not covered">  this.__defineGetter__('parent', <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">    var i = _key.lastIndexOf('\\')</span>
+<span class="cstat-no" title="statement not covered">    return new Registry({</span>
+      host: this.host,
+      hive: this.hive,
+      key:  (i == -1)?'':_key.substring(0, i),
+      arch: this.arch
+    });
+  });
+&nbsp;
+  // validate options...
+<span class="cstat-no" title="statement not covered">  if (HIVES.indexOf(_hive) == -1)</span>
+<span class="cstat-no" title="statement not covered">    throw new Error('illegal hive specified.');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (!KEY_PATTERN.test(_key))</span>
+<span class="cstat-no" title="statement not covered">    throw new Error('illegal key specified.');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (_arch &amp;&amp; _arch != 'x64' &amp;&amp; _arch != 'x86')</span>
+<span class="cstat-no" title="statement not covered">    throw new Error('illegal architecture specified (use x86 or x64)');</span>
+&nbsp;
+}
+&nbsp;
+/**
+ * Registry hive key HKEY_LOCAL_MACHINE.
+ * Note: For writing to this hive your program has to run with admin privileges.
+ * @type {string}
+ */
+Registry.HKLM = HKLM;
+&nbsp;
+/**
+ * Registry hive key HKEY_CURRENT_USER.
+ * @type {string}
+ */
+Registry.HKCU = HKCU;
+&nbsp;
+/**
+ * Registry hive key HKEY_CLASSES_ROOT.
+ * Note: For writing to this hive your program has to run with admin privileges.
+ * @type {string}
+ */
+Registry.HKCR = HKCR;
+&nbsp;
+/**
+ * Registry hive key HKEY_USERS.
+ * Note: For writing to this hive your program has to run with admin privileges.
+ * @type {string}
+ */
+Registry.HKU = HKU;
+&nbsp;
+/**
+ * Registry hive key HKEY_CURRENT_CONFIG.
+ * Note: For writing to this hive your program has to run with admin privileges.
+ * @type {string}
+ */
+Registry.HKCC = HKCC;
+&nbsp;
+/**
+ * Collection of available registry hive keys.
+ * @type {array}
+ */
+Registry.HIVES = HIVES;
+&nbsp;
+/**
+ * Registry value type STRING.
+ * @type {string}
+ */
+Registry.REG_SZ = REG_SZ;
+&nbsp;
+/**
+ * Registry value type MULTILINE_STRING.
+ * @type {string}
+ */
+Registry.REG_MULTI_SZ = REG_MULTI_SZ;
+&nbsp;
+/**
+ * Registry value type EXPANDABLE_STRING.
+ * @type {string}
+ */
+Registry.REG_EXPAND_SZ = REG_EXPAND_SZ;
+&nbsp;
+/**
+ * Registry value type DOUBLE_WORD.
+ * @type {string}
+ */
+Registry.REG_DWORD = REG_DWORD;
+&nbsp;
+/**
+ * Registry value type QUAD_WORD.
+ * @type {string}
+ */
+Registry.REG_QWORD = REG_QWORD;
+&nbsp;
+/**
+ * Registry value type BINARY.
+ * @type {string}
+ */
+Registry.REG_BINARY = REG_BINARY;
+&nbsp;
+/**
+ * Registry value type UNKNOWN.
+ * @type {string}
+ */
+Registry.REG_NONE = REG_NONE;
+&nbsp;
+/**
+ * Collection of available registry value types.
+ * @type {array}
+ */
+Registry.REG_TYPES = REG_TYPES;
+&nbsp;
+/**
+ * The name of the default value. May be used instead of the empty string literal for better readability.
+ * @type {string}
+ */
+Registry.DEFAULT_VALUE = DEFAULT_VALUE;
+&nbsp;
+/**
+ * Retrieve all values from this registry key.
+ * @param {valuesCallback} cb - callback function
+ * @param {ProcessUncleanExitError=} cb.err - error object or null if successful
+ * @param {array=} cb.items - an array of {@link RegistryItem} objects
+ * @returns {Registry} this registry key object
+ */
+Registry.prototype.values = <span class="fstat-no" title="function not covered">function values (cb) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (typeof cb !== 'function')</span>
+<span class="cstat-no" title="statement not covered">    throw new TypeError('must specify a callback');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var args = [ 'QUERY', this.path ];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  pushArch(args, this.arch);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var proc = spawn(getRegExePath(), args, {</span>
+        cwd: undefined,
+        env: process.env,
+        stdio: [ 'ignore', 'pipe', 'pipe' ]
+      })
+  ,   buffer = ''
+  ,   self = this
+  ,   error = null // null means no error previously reported.
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var output = captureOutput(proc);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('close', <span class="fstat-no" title="function not covered">function (code) {</span></span>
+<span class="cstat-no" title="statement not covered">    if (error) {</span>
+<span class="cstat-no" title="statement not covered">      return;</span>
+    } else <span class="cstat-no" title="statement not covered">if (code !== 0) {</span>
+<span class="cstat-no" title="statement not covered">      log('process exited with code ' + code);</span>
+<span class="cstat-no" title="statement not covered">      cb(mkErrorMsg('QUERY', code, output), null);</span>
+    } else {
+<span class="cstat-no" title="statement not covered">      var items = []</span>
+      ,   result = []
+      ,   lines = buffer.split('\n')
+      ,   lineNumber = 0
+&nbsp;
+<span class="cstat-no" title="statement not covered">      for (var i = 0, l = lines.length; i &lt; l; i++) {</span>
+<span class="cstat-no" title="statement not covered">        var line = lines[i].trim();</span>
+<span class="cstat-no" title="statement not covered">        if (line.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered">          log(line);</span>
+<span class="cstat-no" title="statement not covered">          if (lineNumber != 0) {</span>
+<span class="cstat-no" title="statement not covered">            items.push(line);</span>
+          }
+<span class="cstat-no" title="statement not covered">          ++lineNumber;</span>
+        }
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered">      for (var i = 0, l = items.length; i &lt; l; i++) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">        var match = ITEM_PATTERN.exec(items[i])</span>
+        ,   name
+        ,   type
+        ,   value
+&nbsp;
+<span class="cstat-no" title="statement not covered">        if (match) {</span>
+<span class="cstat-no" title="statement not covered">          name = match[1].trim();</span>
+<span class="cstat-no" title="statement not covered">          type = match[2].trim();</span>
+<span class="cstat-no" title="statement not covered">          value = match[3];</span>
+<span class="cstat-no" title="statement not covered">          result.push(new RegistryItem(self.host, self.hive, self.key, name, type, value, self.arch));</span>
+        }
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered">      cb(null, result);</span>
+&nbsp;
+    }
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.stdout.on('data', <span class="fstat-no" title="function not covered">function (data) {</span></span>
+<span class="cstat-no" title="statement not covered">    buffer += data.toString();</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('error', <span class="fstat-no" title="function not covered">function(err) {</span></span>
+<span class="cstat-no" title="statement not covered">    error = err;</span>
+<span class="cstat-no" title="statement not covered">    cb(err);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+/**
+ * Retrieve all subkeys from this registry key.
+ * @param {function (err, items)} cb - callback function
+ * @param {ProcessUncleanExitError=} cb.err - error object or null if successful
+ * @param {array=} cb.items - an array of {@link Registry} objects
+ * @returns {Registry} this registry key object
+ */
+Registry.prototype.keys = <span class="fstat-no" title="function not covered">function keys (cb) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (typeof cb !== 'function')</span>
+<span class="cstat-no" title="statement not covered">    throw new TypeError('must specify a callback');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var args = [ 'QUERY', this.path ];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  pushArch(args, this.arch);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var proc = spawn(getRegExePath(), args, {</span>
+        cwd: undefined,
+        env: process.env,
+        stdio: [ 'ignore', 'pipe', 'pipe' ]
+      })
+  ,   buffer = ''
+  ,   self = this
+  ,   error = null // null means no error previously reported.
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var output = captureOutput(proc);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('close', <span class="fstat-no" title="function not covered">function (code) {</span></span>
+<span class="cstat-no" title="statement not covered">    if (error) {</span>
+<span class="cstat-no" title="statement not covered">      return;</span>
+    } else <span class="cstat-no" title="statement not covered">if (code !== 0) {</span>
+<span class="cstat-no" title="statement not covered">      log('process exited with code ' + code);</span>
+<span class="cstat-no" title="statement not covered">      cb(mkErrorMsg('QUERY', code, output), null);</span>
+    }
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.stdout.on('data', <span class="fstat-no" title="function not covered">function (data) {</span></span>
+<span class="cstat-no" title="statement not covered">    buffer += data.toString();</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.stdout.on('end', <span class="fstat-no" title="function not covered">function () {</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var items = []</span>
+    ,   result = []
+    ,   lines = buffer.split('\n')
+&nbsp;
+<span class="cstat-no" title="statement not covered">    for (var i = 0, l = lines.length; i &lt; l; i++) {</span>
+<span class="cstat-no" title="statement not covered">      var line = lines[i].trim();</span>
+<span class="cstat-no" title="statement not covered">      if (line.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered">        log(line);</span>
+<span class="cstat-no" title="statement not covered">        items.push(line);</span>
+      }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    for (var i = 0, l = items.length; i &lt; l; i++) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      var match = PATH_PATTERN.exec(items[i])</span>
+      ,   hive
+      ,   key
+&nbsp;
+<span class="cstat-no" title="statement not covered">      if (match) {</span>
+<span class="cstat-no" title="statement not covered">        hive = match[1];</span>
+<span class="cstat-no" title="statement not covered">        key  = match[2];</span>
+<span class="cstat-no" title="statement not covered">        if (key &amp;&amp; (key !== self.key)) {</span>
+<span class="cstat-no" title="statement not covered">          result.push(new Registry({</span>
+            host: self.host,
+            hive: self.hive,
+            key:  key,
+            arch: self.arch
+          }));
+        }
+      }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    cb(null, result);</span>
+&nbsp;
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('error', <span class="fstat-no" title="function not covered">function(err) {</span></span>
+<span class="cstat-no" title="statement not covered">    error = err;</span>
+<span class="cstat-no" title="statement not covered">    cb(err);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+/**
+ * Gets a named value from this registry key.
+ * @param {string} name - the value name, use {@link Registry.DEFAULT_VALUE} or an empty string for the default value
+ * @param {function (err, item)} cb - callback function
+ * @param {ProcessUncleanExitError=} cb.err - error object or null if successful
+ * @param {RegistryItem=} cb.item - the retrieved registry item
+ * @returns {Registry} this registry key object
+ */
+Registry.prototype.get = <span class="fstat-no" title="function not covered">function get (name, cb) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (typeof cb !== 'function')</span>
+<span class="cstat-no" title="statement not covered">    throw new TypeError('must specify a callback');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var args = ['QUERY', this.path];</span>
+<span class="cstat-no" title="statement not covered">  if (name == '')</span>
+<span class="cstat-no" title="statement not covered">    args.push('/ve');</span>
+  else
+<span class="cstat-no" title="statement not covered">    args = args.concat(['/v', name]);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  pushArch(args, this.arch);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var proc = spawn(getRegExePath(), args, {</span>
+        cwd: undefined,
+        env: process.env,
+        stdio: [ 'ignore', 'pipe', 'pipe' ]
+      })
+  ,   buffer = ''
+  ,   self = this
+  ,   error = null // null means no error previously reported.
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var output = captureOutput(proc);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('close', <span class="fstat-no" title="function not covered">function (code) {</span></span>
+<span class="cstat-no" title="statement not covered">    if (error) {</span>
+<span class="cstat-no" title="statement not covered">      return;</span>
+    } else <span class="cstat-no" title="statement not covered">if (code !== 0) {</span>
+<span class="cstat-no" title="statement not covered">      log('process exited with code ' + code);</span>
+<span class="cstat-no" title="statement not covered">      cb(mkErrorMsg('QUERY', code, output), null);</span>
+    } else {
+<span class="cstat-no" title="statement not covered">      var items = []</span>
+      ,   result = null
+      ,   lines = buffer.split('\n')
+      ,   lineNumber = 0
+&nbsp;
+<span class="cstat-no" title="statement not covered">      for (var i = 0, l = lines.length; i &lt; l; i++) {</span>
+<span class="cstat-no" title="statement not covered">        var line = lines[i].trim();</span>
+<span class="cstat-no" title="statement not covered">        if (line.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered">          log(line);</span>
+<span class="cstat-no" title="statement not covered">          if (lineNumber != 0) {</span>
+<span class="cstat-no" title="statement not covered">             items.push(line);</span>
+          }
+<span class="cstat-no" title="statement not covered">          ++lineNumber;</span>
+        }
+      }
+&nbsp;
+      //Get last item - so it works in XP where REG QUERY returns with a header
+<span class="cstat-no" title="statement not covered">      var item = items[items.length-1] || ''</span>
+      ,   match = ITEM_PATTERN.exec(item)
+      ,   name
+      ,   type
+      ,   value
+&nbsp;
+<span class="cstat-no" title="statement not covered">      if (match) {</span>
+<span class="cstat-no" title="statement not covered">        name = match[1].trim();</span>
+<span class="cstat-no" title="statement not covered">        type = match[2].trim();</span>
+<span class="cstat-no" title="statement not covered">        value = match[3];</span>
+<span class="cstat-no" title="statement not covered">        result = new RegistryItem(self.host, self.hive, self.key, name, type, value, self.arch);</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered">      cb(null, result);</span>
+    }
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.stdout.on('data', <span class="fstat-no" title="function not covered">function (data) {</span></span>
+<span class="cstat-no" title="statement not covered">    buffer += data.toString();</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('error', <span class="fstat-no" title="function not covered">function(err) {</span></span>
+<span class="cstat-no" title="statement not covered">    error = err;</span>
+<span class="cstat-no" title="statement not covered">    cb(err);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+/**
+ * Sets a named value in this registry key, overwriting an already existing value.
+ * @param {string} name - the value name, use {@link Registry.DEFAULT_VALUE} or an empty string for the default value
+ * @param {string} type - the value type
+ * @param {string} value - the value
+ * @param {function (err)} cb - callback function
+ * @param {ProcessUncleanExitError=} cb.err - error object or null if successful
+ * @returns {Registry} this registry key object
+ */
+Registry.prototype.set = <span class="fstat-no" title="function not covered">function set (name, type, value, cb) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (typeof cb !== 'function')</span>
+<span class="cstat-no" title="statement not covered">    throw new TypeError('must specify a callback');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (REG_TYPES.indexOf(type) == -1)</span>
+<span class="cstat-no" title="statement not covered">    throw Error('illegal type specified.');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var args = ['ADD', this.path];</span>
+<span class="cstat-no" title="statement not covered">  if (name == '')</span>
+<span class="cstat-no" title="statement not covered">    args.push('/ve');</span>
+  else
+<span class="cstat-no" title="statement not covered">    args = args.concat(['/v', name]);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  args = args.concat(['/t', type, '/d', value, '/f']);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  pushArch(args, this.arch);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var proc = spawn(getRegExePath(), args, {</span>
+        cwd: undefined,
+        env: process.env,
+        stdio: [ 'ignore', 'pipe', 'pipe' ]
+      })
+  ,   error = null // null means no error previously reported.
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var output = captureOutput(proc);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('close', <span class="fstat-no" title="function not covered">function (code) {</span></span>
+<span class="cstat-no" title="statement not covered">    if(error) {</span>
+<span class="cstat-no" title="statement not covered">      return;</span>
+    } else <span class="cstat-no" title="statement not covered">if (code !== 0) {</span>
+<span class="cstat-no" title="statement not covered">      log('process exited with code ' + code);</span>
+<span class="cstat-no" title="statement not covered">      cb(mkErrorMsg('ADD', code, output, null));</span>
+    } else {
+<span class="cstat-no" title="statement not covered">      cb(null);</span>
+    }
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.stdout.on('data', <span class="fstat-no" title="function not covered">function (data) {</span></span>
+    // simply discard output
+<span class="cstat-no" title="statement not covered">    log(''+data);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('error', <span class="fstat-no" title="function not covered">function(err) {</span></span>
+<span class="cstat-no" title="statement not covered">    error = err;</span>
+<span class="cstat-no" title="statement not covered">    cb(err);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+/**
+ * Remove a named value from this registry key. If name is empty, sets the default value of this key.
+ * Note: This key must be already existing.
+ * @param {string} name - the value name, use {@link Registry.DEFAULT_VALUE} or an empty string for the default value
+ * @param {function (err)} cb - callback function
+ * @param {ProcessUncleanExitError=} cb.err - error object or null if successful
+ * @returns {Registry} this registry key object
+ */
+Registry.prototype.remove = <span class="fstat-no" title="function not covered">function remove (name, cb) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (typeof cb !== 'function')</span>
+<span class="cstat-no" title="statement not covered">    throw new TypeError('must specify a callback');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var args = name ? ['DELETE', this.path, '/f', '/v', name] : ['DELETE', this.path, '/f', '/ve'];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  pushArch(args, this.arch);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var proc = spawn(getRegExePath(), args, {</span>
+        cwd: undefined,
+        env: process.env,
+        stdio: [ 'ignore', 'pipe', 'pipe' ]
+      })
+  ,   error = null // null means no error previously reported.
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var output = captureOutput(proc);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('close', <span class="fstat-no" title="function not covered">function (code) {</span></span>
+<span class="cstat-no" title="statement not covered">    if(error) {</span>
+<span class="cstat-no" title="statement not covered">      return;</span>
+    } else <span class="cstat-no" title="statement not covered">if (code !== 0) {</span>
+<span class="cstat-no" title="statement not covered">      log('process exited with code ' + code);</span>
+<span class="cstat-no" title="statement not covered">      cb(mkErrorMsg('DELETE', code, output), null);</span>
+    } else {
+<span class="cstat-no" title="statement not covered">      cb(null);</span>
+    }
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.stdout.on('data', <span class="fstat-no" title="function not covered">function (data) {</span></span>
+    // simply discard output
+<span class="cstat-no" title="statement not covered">    log(''+data);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('error', <span class="fstat-no" title="function not covered">function(err) {</span></span>
+<span class="cstat-no" title="statement not covered">    error = err;</span>
+<span class="cstat-no" title="statement not covered">    cb(err);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+/**
+ * Remove all subkeys and values (including the default value) from this registry key.
+ * @param {function (err)} cb - callback function
+ * @param {ProcessUncleanExitError=} cb.err - error object or null if successful
+ * @returns {Registry} this registry key object
+ */
+Registry.prototype.clear = <span class="fstat-no" title="function not covered">function clear (cb) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (typeof cb !== 'function')</span>
+<span class="cstat-no" title="statement not covered">    throw new TypeError('must specify a callback');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var args = ['DELETE', this.path, '/f', '/va'];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  pushArch(args, this.arch);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var proc = spawn(getRegExePath(), args, {</span>
+        cwd: undefined,
+        env: process.env,
+        stdio: [ 'ignore', 'pipe', 'pipe' ]
+      })
+  ,   error = null // null means no error previously reported.
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var output = captureOutput(proc);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('close', <span class="fstat-no" title="function not covered">function (code) {</span></span>
+<span class="cstat-no" title="statement not covered">    if(error) {</span>
+<span class="cstat-no" title="statement not covered">      return;</span>
+    } else <span class="cstat-no" title="statement not covered">if (code !== 0) {</span>
+<span class="cstat-no" title="statement not covered">      log('process exited with code ' + code);</span>
+<span class="cstat-no" title="statement not covered">      cb(mkErrorMsg("DELETE", code, output), null);</span>
+    } else {
+<span class="cstat-no" title="statement not covered">      cb(null);</span>
+    }
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.stdout.on('data', <span class="fstat-no" title="function not covered">function (data) {</span></span>
+    // simply discard output
+<span class="cstat-no" title="statement not covered">    log(''+data);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('error', <span class="fstat-no" title="function not covered">function(err) {</span></span>
+<span class="cstat-no" title="statement not covered">    error = err;</span>
+<span class="cstat-no" title="statement not covered">    cb(err);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+/**
+ * Alias for the clear method to keep it backward compatible.
+ * @method
+ * @deprecated Use {@link Registry#clear} or {@link Registry#destroy} in favour of this method.
+ * @param {function (err)} cb - callback function
+ * @param {ProcessUncleanExitError=} cb.err - error object or null if successful
+ * @returns {Registry} this registry key object
+ */
+Registry.prototype.erase = Registry.prototype.clear;
+&nbsp;
+/**
+ * Delete this key and all subkeys from the registry.
+ * @param {function (err)} cb - callback function
+ * @param {ProcessUncleanExitError=} cb.err - error object or null if successful
+ * @returns {Registry} this registry key object
+ */
+Registry.prototype.destroy = <span class="fstat-no" title="function not covered">function destroy (cb) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (typeof cb !== 'function')</span>
+<span class="cstat-no" title="statement not covered">    throw new TypeError('must specify a callback');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var args = ['DELETE', this.path, '/f'];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  pushArch(args, this.arch);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var proc = spawn(getRegExePath(), args, {</span>
+        cwd: undefined,
+        env: process.env,
+        stdio: [ 'ignore', 'pipe', 'pipe' ]
+      })
+  ,   error = null // null means no error previously reported.
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var output = captureOutput(proc);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('close', <span class="fstat-no" title="function not covered">function (code) {</span></span>
+<span class="cstat-no" title="statement not covered">    if (error) {</span>
+<span class="cstat-no" title="statement not covered">      return;</span>
+    } else <span class="cstat-no" title="statement not covered">if (code !== 0) {</span>
+<span class="cstat-no" title="statement not covered">      log('process exited with code ' + code);</span>
+<span class="cstat-no" title="statement not covered">      cb(mkErrorMsg('DELETE', code, output), null);</span>
+    } else {
+<span class="cstat-no" title="statement not covered">      cb(null);</span>
+    }
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.stdout.on('data', <span class="fstat-no" title="function not covered">function (data) {</span></span>
+    // simply discard output
+<span class="cstat-no" title="statement not covered">    log(''+data);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('error', <span class="fstat-no" title="function not covered">function(err) {</span></span>
+<span class="cstat-no" title="statement not covered">    error = err;</span>
+<span class="cstat-no" title="statement not covered">    cb(err);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+/**
+ * Create this registry key. Note that this is a no-op if the key already exists.
+ * @param {function (err)} cb - callback function
+ * @param {ProcessUncleanExitError=} cb.err - error object or null if successful
+ * @returns {Registry} this registry key object
+ */
+Registry.prototype.create = <span class="fstat-no" title="function not covered">function create (cb) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (typeof cb !== 'function')</span>
+<span class="cstat-no" title="statement not covered">    throw new TypeError('must specify a callback');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var args = ['ADD', this.path, '/f'];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  pushArch(args, this.arch);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var proc = spawn(getRegExePath(), args, {</span>
+        cwd: undefined,
+        env: process.env,
+        stdio: [ 'ignore', 'pipe', 'pipe' ]
+      })
+  ,   error = null // null means no error previously reported.
+&nbsp;
+<span class="cstat-no" title="statement not covered">  var output = captureOutput(proc);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('close', <span class="fstat-no" title="function not covered">function (code) {</span></span>
+<span class="cstat-no" title="statement not covered">    if (error) {</span>
+<span class="cstat-no" title="statement not covered">      return;</span>
+    } else <span class="cstat-no" title="statement not covered">if (code !== 0) {</span>
+<span class="cstat-no" title="statement not covered">      log('process exited with code ' + code);</span>
+<span class="cstat-no" title="statement not covered">      cb(mkErrorMsg('ADD', code, output), null);</span>
+    } else {
+<span class="cstat-no" title="statement not covered">      cb(null);</span>
+    }
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.stdout.on('data', <span class="fstat-no" title="function not covered">function (data) {</span></span>
+    // simply discard output
+<span class="cstat-no" title="statement not covered">    log(''+data);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  proc.on('error', <span class="fstat-no" title="function not covered">function(err) {</span></span>
+<span class="cstat-no" title="statement not covered">    error = err;</span>
+<span class="cstat-no" title="statement not covered">    cb(err);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+/**
+ * Checks if this key already exists.
+ * @param {function (err, exists)} cb - callback function
+ * @param {ProcessUncleanExitError=} cb.err - error object or null if successful
+ * @param {boolean=} cb.exists - true if a registry key with this name already exists
+ * @returns {Registry} this registry key object
+ */
+Registry.prototype.keyExists = <span class="fstat-no" title="function not covered">function keyExists (cb) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.values(<span class="fstat-no" title="function not covered">function (err, items) {</span></span>
+<span class="cstat-no" title="statement not covered">    if (err) {</span>
+      // process should return with code 1 if key not found
+<span class="cstat-no" title="statement not covered">      if (err.code == 1) {</span>
+<span class="cstat-no" title="statement not covered">        return cb(null, false);</span>
+      }
+      // other error
+<span class="cstat-no" title="statement not covered">      return cb(err);</span>
+    }
+<span class="cstat-no" title="statement not covered">    cb(null, true);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+/**
+ * Checks if a value with the given name already exists within this key.
+ * @param {string} name - the value name, use {@link Registry.DEFAULT_VALUE} or an empty string for the default value
+ * @param {function (err, exists)} cb - callback function
+ * @param {ProcessUncleanExitError=} cb.err - error object or null if successful
+ * @param {boolean=} cb.exists - true if a value with the given name was found in this key
+ * @returns {Registry} this registry key object
+ */
+Registry.prototype.valueExists = <span class="fstat-no" title="function not covered">function valueExists (name, cb) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  this.get(name, <span class="fstat-no" title="function not covered">function (err, item) {</span></span>
+<span class="cstat-no" title="statement not covered">    if (err) {</span>
+      // process should return with code 1 if value not found
+<span class="cstat-no" title="statement not covered">      if (err.code == 1) {</span>
+<span class="cstat-no" title="statement not covered">        return cb(null, false);</span>
+      }
+      // other error
+<span class="cstat-no" title="statement not covered">      return cb(err);</span>
+    }
+<span class="cstat-no" title="statement not covered">    cb(null, true);</span>
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return this;</span>
+};
+&nbsp;
+module.exports = Registry;
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Tue Apr 18 2017 11:39:23 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
